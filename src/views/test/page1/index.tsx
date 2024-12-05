@@ -1,3 +1,4 @@
+import { LinearProgress } from "@/components/Progress";
 import { Button } from "@/components/ui/button";
 import { useTest } from "@/views/test/actions";
 import { AnimatePresence, motion } from "framer-motion";
@@ -76,10 +77,14 @@ export const TestPageOne = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 5.5 }}
           >
             This is a fading component.
           </motion.div>
         )}
+      </AnimatePresence>
+      <AnimatePresence>
+        <LinearProgress classes="w-full h-2 my-2"/>
       </AnimatePresence>
     </div>
   );

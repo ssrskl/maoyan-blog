@@ -8,7 +8,8 @@ import { NotFoundPage } from "@/views/Error/404NotFoundPage";
 import { NotAuthorizedPage } from "@/views/Error/403NotAuthorizedPage";
 import { BlogPage } from "@/views/Blog/BlogPage";
 import { BlogDetailPage } from "@/views/Blog/Detail/BlogDetailPage";
-import { LoginPage } from "@/views/Login/LoginPage";
+import { LoginPage } from "@/views/Auth/LoginPage";
+import { RegisterPage } from "@/views/Auth/RegisterPage";
 import { AdminHomePage } from "@/views/Admin/Home/AdminHomePage";
 import { AdminStatisticsPage } from "@/views/Admin/Statistics/AdminStatisticsPage";
 import AdminLayouts from "@/layouts/AdminLayouts";
@@ -16,6 +17,8 @@ import { AdminTagsPage } from "@/views/Admin/Tags/AdminTagsPage";
 import { AdminBlogPage } from "@/views/Admin/Blogs/AdminBlogPage";
 import { AdminEditBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminEditBlogPage";
 import { AdminAddBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminAddBlogPage";
+import { loginLoader } from "./loaders/loginLoader";
+import { loginAction } from "./actions/loginAction";
 
 const router = createBrowserRouter([
   {
@@ -79,7 +82,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
+    loader: loginLoader,
+    action: loginAction,
     element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    loader: loginLoader,
+    element: <RegisterPage />,
   },
   {
     path: "/403",

@@ -1,5 +1,5 @@
-@import 'bytemd/dist/index.css';
-@import './bytemd.css';
+@import "bytemd/dist/index.css";
+@import "./bytemd.css";
 
 @layer tailwind-base, antd;
 
@@ -32,7 +32,7 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -62,5 +62,27 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /**
+   * Progress
+   */
+  .linear-progress {
+    @apply h-1
+    bg-[#CDE8DF]
+    rounded-full
+    mx-1
+    overflow-hidden
+    origin-top;
+  }
+
+  .linear-progress .active-indicator {
+    @apply h-[inherit]
+    bg-[#096B5A]
+    rounded-full
+    origin-right
+    -translate-x-full;
   }
 }
