@@ -2,13 +2,24 @@ import { cn } from "@/lib/utils";
 import { useKeyPress, useScroll } from "ahooks";
 import { FaCat, FaGithub, FaRegLightbulb } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ConfigProvider, Menu, Modal } from "antd";
+import { Avatar, ConfigProvider, Menu, Modal } from "antd";
 import { FaRegUser } from "react-icons/fa6";
 import { SiSearxng } from "react-icons/si";
 import { useState } from "react";
 import Search from "antd/es/input/Search";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { logout } from "@/actions/LogoutAction";
 
 export const Navbar = () => {
+  // 用户信息
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false); // 控制搜索对话框的开关
   // 键盘监听
   useKeyPress(["ctrl.k"], (event) => {
@@ -56,6 +67,7 @@ export const Navbar = () => {
       },
     },
   ];
+
   return (
     <header
       className={cn(
@@ -106,10 +118,21 @@ export const Navbar = () => {
               setOpen(true);
             }}
           />
-          <FaRegUser
-            className="text-base w-8 h-8 p-2 rounded-lg hover:bg-gray-200 cursor-pointer"
-            onClick={() => navigate("/login")}
-          />
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar className="w-6 h-6" src={user?.avatar} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={()=>{logout(dispatch)}}>登出</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <FaRegUser
+              className="text-base w-8 h-8 p-2 rounded-lg hover:bg-gray-200 cursor-pointer"
+              onClick={() => navigate("/login")}
+            />
+          )}
         </div>
         <Modal
           title="搜索"

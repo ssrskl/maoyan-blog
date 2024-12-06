@@ -1,10 +1,10 @@
 export type User = {
-  id: number;
+  id: string;
   username: string;
   email: string;
   status: number;
   avatar: string;
   intro: string;
-  createTime: Date;
-  updateTime: Date;
+  createTime: string | Date;
+  updateTime: string | Date;
 };

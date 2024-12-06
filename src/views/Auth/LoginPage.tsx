@@ -1,14 +1,44 @@
-import { Button, Divider, Input, Typography } from "antd";
+import { Button, Divider, Input, message, Typography } from "antd";
 import { FaKey } from "react-icons/fa6";
 import { HappyProvider } from "@ant-design/happy-work-theme";
-import { Form, Link, useNavigate, useNavigation } from "react-router-dom";
+import {
+  Form,
+  Link,
+  redirect,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
 import { LinearProgress } from "@/components/Progress";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/userStore";
+import { User } from "@/types/User";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const actionData = useActionData();
+  const dispatch = useDispatch();
+  let user: User = {};
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.status === "success") {
+        message.success("登录成功");
+        user.id = actionData.data.$id;
+        user.email = actionData.data.email;
+        user.username = actionData.data.name;
+        user.avatar = actionData.data.prefs.avatar;
+        user.intro = actionData.data.prefs.intro;
+        dispatch(setUser(user));
+        redirect("/");
+      } else if (actionData.status === "error") {
+        message.error(`登录失败,${actionData.message}`);
+      }
+    }
+  }, [actionData]);
   return (
     <div className="relative grid place-content-center">
       <AnimatePresence>

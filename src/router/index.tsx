@@ -19,6 +19,8 @@ import { AdminEditBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminEditBlogPag
 import { AdminAddBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminAddBlogPage";
 import { loginLoader } from "./loaders/loginLoader";
 import { loginAction } from "./actions/loginAction";
+import { registerLoader } from "./loaders/registerLoader";
+import { registerAction } from "./actions/registerAction";
 
 const router = createBrowserRouter([
   {
@@ -88,7 +90,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    loader: loginLoader,
+    loader: registerLoader,
+    action: registerAction,
     element: <RegisterPage />,
   },
   {
