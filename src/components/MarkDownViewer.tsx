@@ -28,7 +28,9 @@ const MarkDownViewer = ({ content }) => {
       message.success("拷贝成功！");
     } catch (err) {
       message.error("拷贝失败！");
-      console.log(`Error copying text to clipboard: ${err.message}`);
+      if (err instanceof Error) {
+        console.log(`Error copying text to clipboard: ${err.message}`);
+      }
     }
   }, []);
 
@@ -79,16 +81,16 @@ const MarkDownViewer = ({ content }) => {
   };
   // 自定义 Markdown 渲染器
   const renderers = {
-    h1: ({ children }) => {
-      const id = children.toString().toLowerCase().replace(/\s+/g, "-");
+    h1: ({ children }: { children: React.ReactNode }) => {
+      const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
       return (
         <h1 className="hover:underline hover:cursor-pointer" id={id}>
           {children}
         </h1>
       );
     },
-    h2: ({ children }) => {
-      const id = children.toString().toLowerCase().replace(/\s+/g, "-");
+    h2: ({ children }: { children: React.ReactNode }) => {
+      const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
       return (
         <h2 className="hover:underline hover:cursor-pointer" id={id}>
           {children}

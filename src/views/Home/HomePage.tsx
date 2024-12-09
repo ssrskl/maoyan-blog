@@ -1,17 +1,25 @@
 import { cn } from "@/lib/utils";
 import { TypeIntro } from "./components/TypeIntro";
 import { IntroScrollMouse } from "./components/IntroScrollMouse";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 import QueueAnim from "rc-queue-anim";
+import { AnimatePresence } from "framer-motion";
+import { LinearProgress } from "@/components/Progress";
 
 export const HomePage = () => {
   const navigate = useNavigate();
+  const navigation = useNavigation();
   let delay = 0;
   // 每次调用，增加延时
   const getDelay = () => (delay += 200);
 
   return (
     <QueueAnim>
+      <AnimatePresence>
+        {navigation.state === "loading" && (
+          <LinearProgress classes="w-full absolute top-0 left-0 right-0'" />
+        )}
+      </AnimatePresence>
       <div key={1} className="grid place-content-center">
         <div className="h-screen gap-5 flex flex-col justify-center px-6">
           <p className="text-2xl md:text-5xl tracking-widest animate-fade-up animate-ease-in-out">
