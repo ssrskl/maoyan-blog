@@ -4,7 +4,7 @@ import { redirect } from "react-router-dom";
 
 export const appLoader = async () => {
   try {
-    await account.get();
+    return await account.get();
   } catch (error) {
     if (error instanceof AppwriteException) {
       console.error(error.message);

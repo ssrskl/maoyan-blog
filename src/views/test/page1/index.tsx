@@ -1,12 +1,13 @@
 import { LinearProgress } from "@/components/Progress";
 import { Button } from "@/components/ui/button";
-import { account } from "@/lib/appwrite";
+import { account, databases } from "@/lib/appwrite";
 import { setUser } from "@/store/userStore";
 import { useTest } from "@/views/test/actions";
 import { message } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MarkDownViewer from "@/components/MarkDownViewer";
 
 export const TestPageOne = () => {
   const { data } = useTest();
@@ -40,6 +41,18 @@ export const TestPageOne = () => {
       },
     },
   };
+
+  async function queryDocuments() {
+    try {
+      const documents = await databases.listDocuments(
+        import.meta.env.VITE_APPWRITE_DATABASE_ID,
+        "674ea93300318c2482e7"
+      );
+      console.log(documents);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className={"flex flex-col justify-center items-center min-h-dvh"}>
@@ -115,8 +128,29 @@ export const TestPageOne = () => {
 
       <Button onClick={() => dispatch(setUser(newuser))}>change user</Button>
 
-      <Button onClick={()=>{message.info('This is a message')}}>Show Message</Button>
-      <Button onClick={()=>{account.deleteSession('current')}}>Log Out</Button>
+      <Button
+        onClick={() => {
+          message.info("This is a message");
+        }}
+      >
+        Show Message
+      </Button>
+      <Button
+        onClick={() => {
+          account.deleteSession("current");
+        }}
+      >
+        Log Out
+      </Button>
+
+      <Button onClick={queryDocuments}>Query Documents</Button>
+
+      <MarkDownViewer
+        content={
+          "# This is a title\n\nThis is a paragraph with **bold** and *italic* text." +
+          "\n\nAnd this is a [link](https://www.google.com)."
+        }
+      />
     </div>
   );
 };

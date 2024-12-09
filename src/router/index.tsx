@@ -21,6 +21,8 @@ import { loginLoader } from "./loaders/loginLoader";
 import { loginAction } from "./actions/loginAction";
 import { registerLoader } from "./loaders/registerLoader";
 import { registerAction } from "./actions/registerAction";
+import { blogLoader } from "./loaders/blogLoader";
+import { blogDetailLoader } from "./loaders/blogDetailLoader";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/blog",
+            loader: blogLoader,
             element: <BlogPage />,
           },
           {
@@ -50,6 +53,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/blogdetail/:id",
+            loader: blogDetailLoader,
             element: <BlogDetailPage />,
           },
         ],

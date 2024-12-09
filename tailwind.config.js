@@ -2,10 +2,10 @@
 export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,tsx,js,jsx}",
+    "./components/**/*.{ts,tsx,js,jsx}",
+    "./app/**/*.{ts,tsx,js,jsx}",
+    "./src/**/*.{ts,tsx,js,jsx}",
   ],
   prefix: "",
   theme: {
@@ -51,6 +51,142 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        light: {
+          primary: '#096B5A',
+          surfaceTint: '#096B5A',
+          onPrimary: '#FFFFFF',
+          primaryContainer: '#A1F2DC',
+          onPrimaryContainer: '#00201A',
+          onSurface: "#171D1B",
+          onSurfaceVariant: '#3F4945',
+          surfaceContainerLowest: '#FFFFFF',
+          surfaceContainerLow: '#EFF5F1',
+          surfaceContainer: '#E9EFEC',
+          surfaceContainerHigh: '#E3EAE6',
+          surfaceContainerHighest: '#DEE4E0',
+        },
+      },
+      fontSize: {
+        displayLarge: [
+          "57px",
+          {
+            fontWeight: "400",
+            lineHeight: "64px",
+            letterSpacing: "-0.25px",
+          },
+        ],
+        displayMedium: [
+          "45px",
+          {
+            fontWeight: "400",
+            lineHeight: "52px",
+            letterSpacing: "0",
+          },
+        ],
+        displaySmall: [
+          "36px",
+          {
+            fontWeight: "400",
+            lineHeight: "44px",
+            letterSpacing: "0",
+          },
+        ],
+        headlineLarge: [
+          "32px",
+          {
+            fontWeight: "400",
+            lineHeight: "40px",
+            letterSpacing: "0",
+          },
+        ],
+        headlineMedium: [
+          "28px",
+          {
+            fontWeight: "400",
+            lineHeight: "36px",
+            letterSpacing: "0",
+          },
+        ],
+        headlineSmall: [
+          "24px",
+          {
+            fontWeight: "400",
+            lineHeight: "32px",
+            letterSpacing: "0",
+          },
+        ],
+        titleLarge: [
+          "22px",
+          {
+            fontWeight: "400",
+            lineHeight: "28px",
+            letterSpacing: "0",
+          },
+        ],
+        titleMedium: [
+          "16px",
+          {
+            fontWeight: "500",
+            lineHeight: "24px",
+            letterSpacing: "0.15px",
+          },
+        ],
+        titleSmall: [
+          "14px",
+          {
+            fontWeight: "500",
+            lineHeight: "20px",
+            letterSpacing: "0.1px",
+          },
+        ],
+        bodyLarge: [
+          "16px",
+          {
+            fontWeight: "400",
+            lineHeight: "24px",
+            letterSpacing: "0.5px",
+          },
+        ],
+        bodyMedium: [
+          "14px",
+          {
+            fontWeight: "400",
+            lineHeight: "20px",
+            letterSpacing: "0.25px",
+          },
+        ],
+        bodySmall: [
+          "12px",
+          {
+            fontWeight: "400",
+            lineHeight: "16px",
+            letterSpacing: "0.4px",
+          },
+        ],
+        labelLarge: [
+          "14px",
+          {
+            fontWeight: "500",
+            lineHeight: "20px",
+            letterSpacing: "0.1px",
+          },
+        ],
+        labelMedium: [
+          "12px",
+          {
+            fontWeight: "500",
+            lineHeight: "16px",
+            letterSpacing: "0.5px",
+          },
+        ],
+        labelSmall: [
+          "11px",
+          {
+            fontWeight: "500",
+            lineHeight: "16px",
+            letterSpacing: "0.5px",
+          },
+        ],
       },
       borderRadius: {
         lg: "var(--radius)",
