@@ -85,7 +85,7 @@ export const Navbar = () => {
           aria-label={"猫颜"}
         >
           <span className="ml-2 font-semibold text-primary text-base">
-            {"猫颜的博客"}
+            {"猫颜的数字花园"}
           </span>
         </Link>
         <div className="h-16 flex-1 hidden sm:flex justify-end items-center gap-6 text-base font-medium mr-8">

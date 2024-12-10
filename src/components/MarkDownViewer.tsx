@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -10,6 +8,9 @@ import { Button } from "./ui/button";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { message } from "antd";
 import React from "react";
+import { visit } from "unist-util-visit";
+import remarkDirective from "remark-directive";
+import remarkParse from "remark-parse";
 
 const MarkDownViewer = ({ content }) => {
   const [codeTheme, setCodeTheme] = useState("");
@@ -81,6 +82,7 @@ const MarkDownViewer = ({ content }) => {
       <code className={className}>{children}</code>
     );
   };
+
   // 自定义 Markdown 渲染器
   const renderers = {
     h1: ({ children }: { children: React.ReactNode }) => {
@@ -109,7 +111,7 @@ const MarkDownViewer = ({ content }) => {
       </li>
     ),
     blockquote: ({ children }: { children: React.ReactNode }) => (
-      <blockquote className="flex-col">
+      <blockquote className="flex-col my-2">
         <div className="flex items-center space-x-2">
           <Icon
             icon="ic:outline-lightbulb"
@@ -119,16 +121,84 @@ const MarkDownViewer = ({ content }) => {
             Tips
           </div>
         </div>
-
-        <p>{children}</p>
+        {children}
       </blockquote>
     ),
+    div: ({
+      children,
+      className,
+    }: {
+      children: React.ReactNode;
+      className: string;
+    }) => {
+      if (className === "warning-block") {
+        return (
+          <div className="flex-col border-l-4 border-[#e4aa2a] p-4 pb-1 bg-[#fef8e7] rounded-lg my-2">
+            <div className="flex items-center space-x-2">
+              <Icon icon="ic:warning" className="w-6 h-6 text-[#4c3907]" />
+              <div className="text-label font-extrabold text-[#4c3907]">
+                Warning
+              </div>
+            </div>
+            {children}
+          </div>
+        );
+      }
+
+      if (className === "info-block") {
+        return (
+          <div className="flex-col border-l-4 border-[#52b1d2] p-4 pb-1 bg-[#eef9fd] rounded-lg my-2">
+            <div className="flex items-center space-x-2">
+              <Icon icon="ic:info" className="w-6 h-6 text-[#24434e]" />
+              <div className="text-label font-extrabold text-[#24434e]">
+                Info
+              </div>
+            </div>
+            {children}
+          </div>
+        );
+      }
+      return <div className={className}>{children}</div>;
+    },
     code,
   };
 
+  function remarkCustomBlock() {
+    return (tree) => {
+      visit(tree, (node) => {
+        if (
+          node.type === "textDirective" ||
+          node.type === "containerDirective" ||
+          node.type === "leafDirective"
+        ) {
+          console.log(node.type);
+          console.log(node.name);
+          if (node.name === "info") {
+            const data = node.data || (node.data = {});
+            data.hName = "div"; // 渲染为 `div`
+            data.hProperties = { className: "info-block" }; // 添加自定义类名
+          }
+          if (node.name === "warning") {
+            const data = node.data || (node.data = {});
+            data.hName = "div"; // 渲染为 `div`
+            data.hProperties = { className: "warning-block" }; // 添加自定义类名
+          }
+        }
+      });
+    };
+  }
+
   return (
     <div className="markdown-content">
-      <Markdown remarkPlugins={[remarkGfm]} components={renderers}>
+      <Markdown
+        remarkPlugins={[
+          remarkParse,
+          remarkGfm,
+          remarkDirective,
+          remarkCustomBlock,
+        ]}
+        components={renderers}
+      >
         {content}
       </Markdown>
     </div>
