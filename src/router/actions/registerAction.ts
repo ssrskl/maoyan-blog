@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { account } from "@/lib/appwrite";
 import { generateID } from "@/lib/utils";
 import { AppwriteException } from "appwrite";

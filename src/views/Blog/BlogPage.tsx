@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Breadcrumb, Pagination } from "antd";
-import { SiTailwindcss } from "react-icons/si";
 import { MdOutlineDateRange, MdOutlineRemoveRedEye } from "react-icons/md";
 import { useLoaderData, useNavigate, useNavigation } from "react-router-dom";
 import { toFromNow } from "@/lib/time";

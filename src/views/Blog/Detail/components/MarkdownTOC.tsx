@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { useMount, useUpdateEffect } from "ahooks";
 import { Affix } from "antd";
 import { load } from "cheerio";

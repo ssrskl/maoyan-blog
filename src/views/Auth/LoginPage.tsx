@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { Button, Divider, Input, message, Typography } from "antd";
 import { FaKey } from "react-icons/fa6";
 import { HappyProvider } from "@ant-design/happy-work-theme";

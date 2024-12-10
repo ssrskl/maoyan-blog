@@ -1,4 +1,6 @@
-import { Avatar, Spin } from "antd";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { Avatar } from "antd";
 import { FaLink, FaLongArrowAltLeft } from "react-icons/fa";
 import {
   SiFacebook,

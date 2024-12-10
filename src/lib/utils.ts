@@ -18,6 +18,7 @@ export function toTitleCase(text: string) {
 
 const IconsMap = new Map<string, string>([
   ["Python", "logos:python"],
+  ["Java","logos:java"],
   ["github", "github"],
   ["instagram", "instagram"],
   ["linkedin", "linkedin"],

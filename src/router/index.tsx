@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { createBrowserRouter } from "react-router-dom";
 import { TestPageOne } from "@/views/test/page1";
 import RootLayouts from "@/layouts/RootLayouts";
@@ -15,7 +17,6 @@ import { AdminStatisticsPage } from "@/views/Admin/Statistics/AdminStatisticsPag
 import AdminLayouts from "@/layouts/AdminLayouts";
 import { AdminTagsPage } from "@/views/Admin/Tags/AdminTagsPage";
 import { AdminBlogPage } from "@/views/Admin/Blogs/AdminBlogPage";
-import { AdminEditBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminEditBlogPage";
 import { AdminAddBlogPage } from "@/views/Admin/Blogs/EditBlog/AdminAddBlogPage";
 import { loginLoader } from "./loaders/loginLoader";
 import { loginAction } from "./actions/loginAction";

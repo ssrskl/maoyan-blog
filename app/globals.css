@@ -183,4 +183,16 @@
   .markdown-content .code-block * {
     @apply !bg-inherit;
   }
+  .markdown-content blockquote {
+    @apply border-l-4
+    border-[#009318]
+    p-4
+    bg-[#e6f6e7]
+    rounded-lg;
+  }
+
+  .markdown-content blockquote p {
+    @apply m-0
+    text-[#4a724d];
+  }
 }

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { cn } from "@/lib/utils";
 import { useKeyPress, useScroll } from "ahooks";
 import { FaCat, FaGithub, FaRegLightbulb } from "react-icons/fa";

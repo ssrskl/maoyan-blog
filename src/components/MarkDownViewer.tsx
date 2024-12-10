@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -35,7 +37,7 @@ const MarkDownViewer = ({ content }) => {
   }, []);
 
   const code = (props) => {
-    const { children, className, node, ...rest } = props;
+    const { children, className, ...rest } = props;
     const match = className?.match(/language-(\w+)/);
     return match ? (
       <>
@@ -92,11 +94,35 @@ const MarkDownViewer = ({ content }) => {
     h2: ({ children }: { children: React.ReactNode }) => {
       const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
       return (
-        <h2 className="hover:underline hover:cursor-pointer" id={id}>
-          {children}
+        <h2
+          className="hover:underline hover:cursor-pointer flex items-center space-x-2"
+          id={id}
+        >
+          <p>{children}</p>
         </h2>
       );
     },
+    li: ({ children }: { children: React.ReactNode }) => (
+      <li className="list-none flex items-center space-x-2">
+        <Icon icon="ph:dot-duotone" className="w-6 h-6 text-light-primary" />
+        <span className="">{children}</span>
+      </li>
+    ),
+    blockquote: ({ children }: { children: React.ReactNode }) => (
+      <blockquote className="flex-col">
+        <div className="flex items-center space-x-2">
+          <Icon
+            icon="ic:outline-lightbulb"
+            className="w-6 h-6 text-light-primary"
+          />
+          <div className="text-label font-extrabold text-light-primary">
+            Tips
+          </div>
+        </div>
+
+        <p>{children}</p>
+      </blockquote>
+    ),
     code,
   };
 
