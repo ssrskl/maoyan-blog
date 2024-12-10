@@ -24,6 +24,7 @@ import { registerLoader } from "./loaders/registerLoader";
 import { registerAction } from "./actions/registerAction";
 import { blogLoader } from "./loaders/blogLoader";
 import { blogDetailLoader } from "./loaders/blogDetailLoader";
+import { TestPage2 } from "@/views/test/page1/TestPage2";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
           {
             path: "/test1",
             element: <TestPageOne />,
+          },
+          {
+            path: "/test2",
+            element: <TestPage2 />,
           },
           {
             path: "/blogdetail/:id",

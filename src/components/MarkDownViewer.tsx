@@ -86,19 +86,22 @@ const MarkDownViewer = ({ content }) => {
   // 自定义 Markdown 渲染器
   const renderers = {
     h1: ({ children }: { children: React.ReactNode }) => {
-      const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      // const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
       return (
-        <h1 className="hover:underline hover:cursor-pointer" id={id}>
+        <h1
+          className="hover:underline hover:cursor-pointer"
+          //  id={id}
+        >
           {children}
         </h1>
       );
     },
     h2: ({ children }: { children: React.ReactNode }) => {
-      const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      // const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
       return (
         <h2
           className="hover:underline hover:cursor-pointer flex items-center space-x-2"
-          id={id}
+          // id={id}
         >
           <p>{children}</p>
         </h2>
@@ -148,7 +151,10 @@ const MarkDownViewer = ({ content }) => {
         return (
           <div className="flex-col border-l-4 border-[#009318] p-4 pb-1 bg-[#e6f6e7] rounded-lg my-2">
             <div className="flex items-center space-x-2">
-              <Icon icon="icon-park-solid:success" className="w-6 h-6 text-light-primary" />
+              <Icon
+                icon="icon-park-solid:success"
+                className="w-6 h-6 text-light-primary"
+              />
               <div className="text-label font-extrabold text-light-primary">
                 Success
               </div>
