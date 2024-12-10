@@ -144,7 +144,19 @@ const MarkDownViewer = ({ content }) => {
           </div>
         );
       }
-
+      if (className === "success-block") {
+        return (
+          <div className="flex-col border-l-4 border-[#009318] p-4 pb-1 bg-[#e6f6e7] rounded-lg my-2">
+            <div className="flex items-center space-x-2">
+              <Icon icon="icon-park-solid:success" className="w-6 h-6 text-light-primary" />
+              <div className="text-label font-extrabold text-light-primary">
+                Success
+              </div>
+            </div>
+            {children}
+          </div>
+        );
+      }
       if (className === "info-block") {
         return (
           <div className="flex-col border-l-4 border-[#52b1d2] p-4 pb-1 bg-[#eef9fd] rounded-lg my-2">
@@ -152,6 +164,19 @@ const MarkDownViewer = ({ content }) => {
               <Icon icon="ic:info" className="w-6 h-6 text-[#24434e]" />
               <div className="text-label font-extrabold text-[#24434e]">
                 Info
+              </div>
+            </div>
+            {children}
+          </div>
+        );
+      }
+      if (className === "danger-block") {
+        return (
+          <div className="flex-col border-l-4 border-[#e03e3e] p-4 pb-1 bg-[#ffebec] rounded-lg my-2">
+            <div className="flex items-center space-x-2">
+              <Icon icon="mdi:fire" className="w-6 h-6 text-[#4b1415]" />
+              <div className="text-label font-extrabold text-[#4b1415]">
+                danger
               </div>
             </div>
             {children}
@@ -182,6 +207,16 @@ const MarkDownViewer = ({ content }) => {
             const data = node.data || (node.data = {});
             data.hName = "div"; // 渲染为 `div`
             data.hProperties = { className: "warning-block" }; // 添加自定义类名
+          }
+          if (node.name === "success") {
+            const data = node.data || (node.data = {});
+            data.hName = "div"; // 渲染为 `div`
+            data.hProperties = { className: "success-block" }; // 添加自定义类名
+          }
+          if (node.name === "danger") {
+            const data = node.data || (node.data = {});
+            data.hName = "div"; // 渲染为 `div`
+            data.hProperties = { className: "danger-block" }; // 添加自定义类名
           }
         }
       });
