@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useKeyPress, useScroll } from "ahooks";
 import { FaCat, FaGithub, FaRegLightbulb } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, redirect, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, ConfigProvider, Menu, Modal } from "antd";
 import { FaRegUser } from "react-icons/fa6";
 import { SiSearxng } from "react-icons/si";
@@ -166,7 +166,7 @@ export const Navbar = () => {
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Blogs">
-              {blogsData?.documents.map((blog) => (
+              {blogsData?.documents.slice(0, 5).map((blog) => (
                 <CommandItem
                   key={blog.$id}
                   onSelect={() => {
@@ -174,47 +174,16 @@ export const Navbar = () => {
                     navigate(`/blogdetail/${blog.$id}`);
                   }}
                 >
-                  <span onClick={() => navigate(`/blogdetail/${blog.$id}`)}>
+                  <span onClick={() => redirect(`/blogdetail/${blog.$id}`)}>
                     {blog.title}
                   </span>
                 </CommandItem>
               ))}
-            </CommandGroup>
-            <CommandGroup heading="Suggestions">
-              <CommandItem
-                onSelect={() => {
-                  console.log("select");
-                }}
-              >
-                <Calendar />
-                <span>Calendar</span>
-              </CommandItem>
-              <CommandItem>
-                <Smile />
-                <span>Search Emoji</span>
-              </CommandItem>
-              <CommandItem>
-                <Calculator />
-                <span>Calculator</span>
-              </CommandItem>
-            </CommandGroup>
-            <CommandSeparator />
-            <CommandGroup heading="Settings">
-              <CommandItem>
-                <User />
-                <span>Profile</span>
-                <CommandShortcut>⌘P</CommandShortcut>
-              </CommandItem>
-              <CommandItem>
-                <CreditCard />
-                <span>Billing</span>
-                <CommandShortcut>⌘B</CommandShortcut>
-              </CommandItem>
-              <CommandItem>
-                <Settings />
-                <span>Settings</span>
-                <CommandShortcut>⌘S</CommandShortcut>
-              </CommandItem>
+              {blogsData?.total > 5 && (
+                <CommandItem onSelect={() => setOpen(false)}>
+                  <span onClick={() => navigate("/blogs")}>...</span>
+                </CommandItem>
+              )}
             </CommandGroup>
           </CommandList>
         </CommandDialog>

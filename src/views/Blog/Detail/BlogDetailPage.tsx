@@ -13,6 +13,7 @@ import {
 } from "react-icons/si";
 import {
   useLoaderData,
+  useLocation,
   useNavigate,
   useNavigation,
   useParams,
@@ -24,8 +25,13 @@ import { AnimatePresence } from "framer-motion";
 import { LinearProgress } from "@/components/Progress";
 import { Icon } from "@iconify/react";
 import MarkDownViewer from "@/components/MarkDownViewer";
+import { useEffect } from "react";
 
 export const BlogDetailPage = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   // 获得博客信息
   const { blog } = useLoaderData();
   // 获得博客ID
