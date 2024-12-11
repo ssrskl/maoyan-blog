@@ -65,7 +65,7 @@ export const BlogPage = () => {
                       {blog.tags &&
                         blog.tags.map((tag) => (
                           <div className="text-gray-400 text-sm flex gap-1">
-                            <p className="text-gray-400 text-sm">
+                            <p className="text-gray-400 text-sm hover:underline">
                               # {tag.tag_name}
                             </p>
                             <Icon icon={tag.tag_icon} className="w-4 h-4" />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -25,7 +26,7 @@ const MarkDownViewer = ({ content }) => {
     return () => mediaQuery.removeEventListener("change", themeListener);
   }, []);
 
-  const handleCopy = useCallback(async (text) => {
+  const handleCopy = useCallback(async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       message.success("拷贝成功！");
@@ -37,7 +38,7 @@ const MarkDownViewer = ({ content }) => {
     }
   }, []);
 
-  const code = (props) => {
+  const code = (props: { [x: string]: any; children: any; className: any }) => {
     const { children, className, ...rest } = props;
     const match = className?.match(/language-(\w+)/);
     return match ? (
@@ -86,22 +87,25 @@ const MarkDownViewer = ({ content }) => {
   // 自定义 Markdown 渲染器
   const renderers = {
     h1: ({ children }: { children: React.ReactNode }) => {
-      // const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      let id = "";
+      if (children != undefined) {
+        id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      }
       return (
-        <h1
-          className="hover:underline hover:cursor-pointer"
-          //  id={id}
-        >
+        <h1 className="hover:underline hover:cursor-pointer text-2xl" id={id}>
           {children}
         </h1>
       );
     },
     h2: ({ children }: { children: React.ReactNode }) => {
-      // const id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      let id = "";
+      if (children != undefined) {
+        id = children!.toString().toLowerCase().replace(/\s+/g, "-");
+      }
       return (
         <h2
           className="hover:underline hover:cursor-pointer flex items-center space-x-2"
-          // id={id}
+          id={id}
         >
           <p>{children}</p>
         </h2>
@@ -195,7 +199,7 @@ const MarkDownViewer = ({ content }) => {
   };
 
   function remarkCustomBlock() {
-    return (tree) => {
+    return (tree: any) => {
       visit(tree, (node) => {
         if (
           node.type === "textDirective" ||

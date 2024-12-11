@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { createBrowserRouter } from "react-router-dom";
 import { TestPageOne } from "@/views/test/page1";
 import RootLayouts from "@/layouts/RootLayouts";
@@ -25,6 +23,7 @@ import { registerAction } from "./actions/registerAction";
 import { blogLoader } from "./loaders/blogLoader";
 import { blogDetailLoader } from "./loaders/blogDetailLoader";
 import { TestPage2 } from "@/views/test/page1/TestPage2";
+import { BlogPublish } from "@/views/Blog/Publish/BlogPublish";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +61,10 @@ const router = createBrowserRouter([
             loader: blogDetailLoader,
             element: <BlogDetailPage />,
           },
+          {
+            path: "/blogpublish",
+            element: <BlogPublish/>,
+          }
         ],
       },
       {
