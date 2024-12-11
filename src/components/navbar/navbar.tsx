@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { cn } from "@/lib/utils";
 import { useKeyPress, useScroll } from "ahooks";
 import { FaCat, FaGithub, FaRegLightbulb } from "react-icons/fa";
@@ -17,8 +15,28 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { logout } from "@/actions/LogoutAction";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "../ui/command";
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react";
+import { useGetBlogs } from "@/actions/BlogRequest";
 
 export const Navbar = () => {
+  const { data: blogsData } = useGetBlogs();
   // 用户信息
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -126,7 +144,13 @@ export const Navbar = () => {
                 <Avatar className="w-6 h-6" src={user?.avatar} />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={()=>{logout(dispatch)}}>登出</DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    logout(dispatch);
+                  }}
+                >
+                  登出
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
@@ -136,21 +160,64 @@ export const Navbar = () => {
             />
           )}
         </div>
-        <Modal
-          title="搜索"
-          open={open}
-          footer={null}
-          onCancel={() => setOpen(false)}
-        >
-          <div className="flex flex-col">
-            <Search
-              placeholder="请输入搜索内容"
-              allowClear
-              enterButton
-              size="large"
-            />
-          </div>
-        </Modal>
+
+        <CommandDialog open={open} onOpenChange={setOpen}>
+          <CommandInput placeholder="搜索文章..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Blogs">
+              {blogsData?.documents.map((blog) => (
+                <CommandItem
+                  key={blog.$id}
+                  onSelect={() => {
+                    setOpen(false);
+                    navigate(`/blogdetail/${blog.$id}`);
+                  }}
+                >
+                  <span onClick={() => navigate(`/blogdetail/${blog.$id}`)}>
+                    {blog.title}
+                  </span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+            <CommandGroup heading="Suggestions">
+              <CommandItem
+                onSelect={() => {
+                  console.log("select");
+                }}
+              >
+                <Calendar />
+                <span>Calendar</span>
+              </CommandItem>
+              <CommandItem>
+                <Smile />
+                <span>Search Emoji</span>
+              </CommandItem>
+              <CommandItem>
+                <Calculator />
+                <span>Calculator</span>
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Settings">
+              <CommandItem>
+                <User />
+                <span>Profile</span>
+                <CommandShortcut>⌘P</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <CreditCard />
+                <span>Billing</span>
+                <CommandShortcut>⌘B</CommandShortcut>
+              </CommandItem>
+              <CommandItem>
+                <Settings />
+                <span>Settings</span>
+                <CommandShortcut>⌘S</CommandShortcut>
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
       </div>
     </header>
   );

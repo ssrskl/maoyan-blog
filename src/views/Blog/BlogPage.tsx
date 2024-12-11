@@ -13,14 +13,8 @@ export const BlogPage = () => {
   let delay = 0;
   // 每次调用，增加延时
   const getDelay = () => (delay += 200);
-  // const blogQueryVO: BlogQueryVO = {
-  //   pageNum: 1,
-  //   pageSize: 10,
-  // };
   const navigate = useNavigate();
   const navigation = useNavigation();
-  // const { data: responseResult } = useGetBlogDTOs(blogQueryVO);
-  // const BlogDTOs = responseResult?.data;
   return (
     <div className="flex justify-center pt-10">
       <AnimatePresence>
