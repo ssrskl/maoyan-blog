@@ -22,17 +22,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "../ui/command";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
 import { useGetBlogs } from "@/actions/BlogRequest";
 
 export const Navbar = () => {
@@ -111,6 +101,7 @@ export const Navbar = () => {
             theme={{
               components: {
                 Menu: {
+                  fontFamily: "霞鹜漫黑",
                   itemActiveBg: "#e6f4ff",
                   itemColor: "black",
                 },
@@ -138,7 +129,7 @@ export const Navbar = () => {
               setOpen(true);
             }}
           />
-          {user ? (
+          {user?.avatar ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Avatar className="w-6 h-6" src={user?.avatar} />

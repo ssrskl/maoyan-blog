@@ -1,5 +1,6 @@
-@import "bytemd/dist/index.css";
-@import "./bytemd.css";
+/* @import "bytemd/dist/index.css";
+@import "./bytemd.css"; */
+@import "./markdown.css";
 
 @layer tailwind-base, antd;
 
@@ -10,6 +11,17 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: "霞鹜漫黑";
+    src: url("../src/assets/fonts/LXGWMarkerGothic-Regular.ttf")
+      format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: "霞鹜漫黑", sans-serif;
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -86,15 +98,16 @@
     -translate-x-full;
   }
 
-  /**
-    Markdown styles
-    */
-  .markdown-content {
+  /* .markdown-content {
     @apply text-light-onSurface
           leading-7
           pt-1;
   }
-
+  .markdown-content code {
+    @apply border rounded-md p-2
+    bg-[#f2f2f2]
+    my-0.5;
+  }
   .markdown-content > :first-child {
     @apply !mt-0;
   }
@@ -120,14 +133,13 @@
           ps-[18px];
   }
 
-  .markdown-content code {
-    @apply inline-block
+  .markdown-content .code-block code {
+    @apply w-full
+    inline-block
           text-bodyMedium
           text-light-onSurfaceVariant
           bg-light-surfaceContainerHigh
-          rounded-md
-          py-[1px]
-          px-1.5;
+          rounded-b-lg;
   }
 
   .markdown-content strong code {
@@ -173,16 +185,12 @@
   }
 
   .markdown-content .code-block {
-    @apply bg-light-surfaceContainer
-          rounded-t-lg
+    @apply w-full
+    rounded-t-lg
           rounded-b-lg
-          mb-0.5
           overflow-hidden;
   }
 
-  .markdown-content .code-block * {
-    @apply !bg-inherit;
-  }
   .markdown-content blockquote {
     @apply border-l-4
     border-[#009318]
@@ -194,5 +202,5 @@
   .markdown-content blockquote p {
     @apply m-0
     text-[#4a724d];
-  }
+  } */
 }

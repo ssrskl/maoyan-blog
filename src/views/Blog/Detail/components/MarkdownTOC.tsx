@@ -68,7 +68,7 @@ export const MarkdownTOC = () => {
             headerIds.map((el) => (
               <li
                 key={el}
-                className="cursor-pointer hover:font-bol"
+                className="cursor-pointer hover:font-bol font-[霞鹜漫黑]"
                 onClick={() => {
                   scrollToAnchor(el);
                   navigate(`#${el}`);

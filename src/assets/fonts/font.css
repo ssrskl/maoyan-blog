@@ -1,20 +1,27 @@
 @font-face {
-  font-family: 'DINPro-Bold';
-  src: url('./DINPro-Bold.otf');
+  font-family: "DINPro-Bold";
+  src: url("./DINPro-Bold.otf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DINPro-Medium';
-  src: url('./DINPro-Medium.otf');
+  font-family: "DINPro-Medium";
+  src: url("./DINPro-Medium.otf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DINPro-Regular';
-  src: url('./DINPro-Regular.otf');
+  font-family: "DINPro-Regular";
+  src: url("./DINPro-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "霞鹜漫黑";
+  src: url("./LXGWWenKai-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }

@@ -2,7 +2,10 @@ import { FaBlog, FaCode, FaNoteSticky, FaTag } from "react-icons/fa6";
 import { AdminPageHeader } from "../components/AdminPageHeader";
 import { Statistic } from "antd";
 import { motion } from "framer-motion";
+import { useGetBlogs } from "@/actions/BlogRequest";
 export const AdminStatisticsPage = () => {
+  const { data: blogsData } = useGetBlogs();
+
   // 定义父容器的动画 variants
   const containerVariants = {
     hidden: { opacity: 1 },
@@ -49,7 +52,7 @@ export const AdminStatisticsPage = () => {
             <p>博客</p>
             <FaBlog />
           </div>
-          <Statistic value={18} />
+          <Statistic value={blogsData?.total} />
         </motion.div>
 
         <motion.div

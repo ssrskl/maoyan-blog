@@ -2,7 +2,6 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { hopscotch, coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState, useEffect, useCallback } from "react";
 import { getIcon, toTitleCase } from "../lib/utils";
 import { Button } from "./ui/button";
@@ -14,18 +13,7 @@ import remarkDirective from "remark-directive";
 import remarkParse from "remark-parse";
 
 const MarkDownViewer = ({ content }) => {
-  const [codeTheme, setCodeTheme] = useState("");
-
-  // 监听系统主题切换，自动切换代码高亮主题
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setCodeTheme(mediaQuery.matches ? hopscotch : coy);
-    const themeListener = mediaQuery.addEventListener("change", (event) => {
-      setCodeTheme(event.matches ? hopscotch : coy);
-    });
-    return () => mediaQuery.removeEventListener("change", themeListener);
-  }, []);
-
+  const [showLineNumbers, setShowLineNumbers] = useState(false);
   const handleCopy = useCallback(async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -41,32 +29,54 @@ const MarkDownViewer = ({ content }) => {
   const code = (props: { [x: string]: any; children: any; className: any }) => {
     const { children, className, ...rest } = props;
     const match = className?.match(/language-(\w+)/);
+
+    // 高亮指定行
+    const highlightedLines = [1, 2]; // 替换为你想高亮的行号数组
+
+    const lineProps = (lineNumber: number) => {
+      return { style: { backgroundColor: "#000000" } };
+      if (highlightedLines.includes(lineNumber)) {
+        return { style: { backgroundColor: "#000000" } }; // 高亮的背景色
+      }
+      return {};
+    };
+
     return match ? (
       <>
         <div className="code-block">
-          <div className="flex w-full items-end justify-between">
-            <div className="flex items-center space-x-2 pl-4">
+          <div className="flex w-full items-end justify-between bg-light-surfaceContainerHigh">
+            <div className="flex items-center space-x-2 pl-4 ">
               <Icon icon={getIcon(match[1])} className="w-4 h-4" />
               <div className=" font-sans text-sm">{toTitleCase(match[1])}</div>
             </div>
-            <Button
-              onClick={handleCopy.bind(null, children)}
-              variant={"ghost"}
-              className="text-bodyMedium pb-0 items-center flex space-x-2 rounded-lg h-8 px-2"
-            >
-              <Icon icon="ph:copy" className="w-4 h-4" />
-              <p>Copy Code</p>
-            </Button>
+            <div className="flex items-center space-x-2 ">
+              <Button
+                onClick={() => setShowLineNumbers(!showLineNumbers)}
+                variant={"ghost"}
+                className="text-bodyMedium pb-0 items-center flex space-x-2 rounded-lg h-8 px-2 hover:font-bold"
+              >
+                <Icon icon="lsicon:number-filled" className="w-6 h-6 " />
+              </Button>
+
+              <Button
+                onClick={handleCopy.bind(null, children)}
+                variant={"ghost"}
+                className="text-bodyMedium pb-0 items-center flex space-x-2 rounded-lg h-8 px-2 hover:font-bold"
+              >
+                <Icon icon="ph:copy" className="w-4 h-4" />
+                <p>Copy Code</p>
+              </Button>
+            </div>
           </div>
 
           <SyntaxHighlighter
             {...rest}
             PreTag="div"
             language={match[1]}
-            style={codeTheme}
+            // style={codeTheme}
             customStyle={{
               marginBlock: "0",
-              padding: "2px",
+              padding: "0px",
             }}
             codeTagProps={{
               style: {
@@ -74,6 +84,8 @@ const MarkDownViewer = ({ content }) => {
                 fontWeight: "600",
               },
             }}
+            showLineNumbers={showLineNumbers}
+            wrapLines={true}
           >
             {children}
           </SyntaxHighlighter>
@@ -117,20 +129,20 @@ const MarkDownViewer = ({ content }) => {
         <span className="">{children}</span>
       </li>
     ),
-    blockquote: ({ children }: { children: React.ReactNode }) => (
-      <blockquote className="flex-col my-2">
-        <div className="flex items-center space-x-2">
-          <Icon
-            icon="ic:outline-lightbulb"
-            className="w-6 h-6 text-light-primary"
-          />
-          <div className="text-label font-extrabold text-light-primary">
-            Tips
-          </div>
-        </div>
-        {children}
-      </blockquote>
-    ),
+    // blockquote: ({ children }: { children: React.ReactNode }) => (
+    //   <blockquote className="flex-col my-2">
+    //     <div className="flex items-center space-x-2">
+    //       <Icon
+    //         icon="ic:outline-lightbulb"
+    //         className="w-6 h-6 text-light-primary"
+    //       />
+    //       <div className="text-label font-extrabold text-light-primary">
+    //         Tips
+    //       </div>
+    //     </div>
+    //     {children}
+    //   </blockquote>
+    // ),
     div: ({
       children,
       className,
@@ -234,7 +246,7 @@ const MarkDownViewer = ({ content }) => {
   }
 
   return (
-    <div className="markdown-content">
+    <div className="markdown-content" id="markdown">
       <Markdown
         remarkPlugins={[
           remarkParse,

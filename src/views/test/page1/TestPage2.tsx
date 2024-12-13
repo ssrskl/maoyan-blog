@@ -1,62 +1,87 @@
-import { useGetTags } from "@/actions/TagRequest";
-import MarkDownViewer from "@/components/MarkDownViewer";
-import { TagSelect } from "@/components/TagSelect";
-import { Button } from "@/components/ui/button";
-
-import { Separator } from "@/components/ui/separator";
-
-import { Textarea } from "@/components/ui/textarea";
-import { RotateCcw } from "lucide-react";
-import { useState } from "react";
-
+import {
+  Menubar,
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
 export const TestPage2 = () => {
-  const [content, setContent] = useState("");
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-  };
-  const { data } = useGetTags();
-  console.log(data);
   return (
     <div className={"flex flex-col justify-center items-center min-h-dvh"}>
-      <div className=" h-full flex-col container border-2 rounded-lg">
-        <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <h2 className="text-lg font-semibold">Playground</h2>
-        </div>
-        <Separator />
-        <div className="flex-1">
-          <div className="container h-full py-6">
-            <div className="grid h-full items-stretch gap-6 ">
-              <div className="hidden flex-col space-y-4 sm:flex md:order-2"></div>
-              <div className="md:order-1">
-                <div className="mt-0 border-0 p-0">
-                  <div className="flex flex-col space-y-4">
-                    <div className="grid h-full grid-rows-2 gap-6 lg:grid-cols-2 lg:grid-rows-1">
-                      <Textarea
-                        placeholder="We're writing to [inset]. Congrats from OpenAI!"
-                        className=" min-h-[300px] lg:min-h-[700px] xl:min-h-[700px] max-h-[700px]"
-                        value={content}
-                        onChange={handleContentChange}
-                      />
-                      <div className="rounded-md border bg-muted p-4 max-h-[700px] overflow-y-auto">
-                        <MarkDownViewer content={content} />
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button>Submit</Button>
-                      <Button variant="secondary">
-                        <span className="sr-only">Show history</span>
-                        <RotateCcw />
-                      </Button>
-                      <TagSelect />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Menubar>
+        <MenubarMenu>
+          <MenubarTrigger>File</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>Edit</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>
+              Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem>
+              Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+            </MenubarItem>
+            <MenubarSeparator />
+            <MenubarSub>
+              <MenubarSubTrigger>Find</MenubarSubTrigger>
+              <MenubarSubContent>
+                <MenubarItem>Search the web</MenubarItem>
+                <MenubarSeparator />
+                <MenubarItem>Find...</MenubarItem>
+                <MenubarItem>Find Next</MenubarItem>
+                <MenubarItem>Find Previous</MenubarItem>
+              </MenubarSubContent>
+            </MenubarSub>
+            <MenubarSeparator />
+            <MenubarItem>Cut</MenubarItem>
+            <MenubarItem>Copy</MenubarItem>
+            <MenubarItem>Paste</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>View</MenubarTrigger>
+          <MenubarContent>
+            <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
+            <MenubarCheckboxItem checked>
+              Always Show Full URLs
+            </MenubarCheckboxItem>
+            <MenubarSeparator />
+            <MenubarItem inset>
+              Reload <MenubarShortcut>⌘R</MenubarShortcut>
+            </MenubarItem>
+            <MenubarItem disabled inset>
+              Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
+            </MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem inset>Toggle Fullscreen</MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem inset>Hide Sidebar</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>Profiles</MenubarTrigger>
+          <MenubarContent>
+            <MenubarRadioGroup value="benoit">
+              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
+              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
+              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            </MenubarRadioGroup>
+            <MenubarSeparator />
+            <MenubarItem inset>Edit...</MenubarItem>
+            <MenubarSeparator />
+            <MenubarItem inset>Add Profile...</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>
     </div>
   );
 };
