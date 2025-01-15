@@ -44,28 +44,18 @@ const MarkDownViewer = ({ content }) => {
     return match ? (
       <>
         <div className="code-block">
-          <div className="flex w-full items-end justify-between bg-light-surfaceContainerHigh">
+          <div className="flex w-full items-end justify-between bg-[#f8f8f8] rounded-t-xl">
             <div className="flex items-center space-x-2 pl-4 ">
               <Icon icon={getIcon(match[1])} className="w-4 h-4" />
               <div className=" font-sans text-sm">{toTitleCase(match[1])}</div>
             </div>
             <div className="flex items-center space-x-2 ">
-              <Button
-                onClick={() => setShowLineNumbers(!showLineNumbers)}
-                variant={"ghost"}
-                className="text-bodyMedium pb-0 items-center flex space-x-2 rounded-lg h-8 px-2 hover:font-bold"
-              >
-                <Icon icon="lsicon:number-filled" className="w-6 h-6 " />
-              </Button>
-
-              <Button
+              <div
                 onClick={handleCopy.bind(null, children)}
-                variant={"ghost"}
-                className="text-bodyMedium pb-0 items-center flex space-x-2 rounded-lg h-8 px-2 hover:font-bold"
+                className="cursor-pointer hover:text-light-primary hover:underline rounded-md p-2"
               >
-                <Icon icon="ph:copy" className="w-4 h-4" />
-                <p>Copy Code</p>
-              </Button>
+                <Icon icon="ph:copy" />
+              </div>
             </div>
           </div>
 
