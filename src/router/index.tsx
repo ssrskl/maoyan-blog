@@ -24,6 +24,7 @@ import { blogLoader } from "./loaders/blogLoader";
 import { blogDetailLoader } from "./loaders/blogDetailLoader";
 import { TestPage2 } from "@/views/test/page1/TestPage2";
 import { BlogPublish } from "@/views/Blog/Publish/BlogPublish";
+import CodeHighlightPage from "@/app/code-highlight/page";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
           {
             path: "/test2",
             element: <TestPage2 />,
+          },
+          {
+            path: "/code-highlight",
+            element: <CodeHighlightPage/>
           },
           {
             path: "/blogdetail/:id",

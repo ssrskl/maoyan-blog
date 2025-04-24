@@ -6,7 +6,7 @@ import mediumZoom from '@bytemd/plugin-medium-zoom';
 import { type EditorProps } from '@bytemd/react';
 import { merge } from 'lodash-es';
 
-import { headingPlugin, prettyLinkPlugin, shikiPlugin } from './plugins';
+import { headingPlugin, prettyLinkPlugin, shikiPlugin, magicCommentsPlugin } from './plugins';
 
 export const plugins = [
   breaks(),
@@ -16,6 +16,7 @@ export const plugins = [
   prettyLinkPlugin(),
   shikiPlugin(),
   headingPlugin(),
+  magicCommentsPlugin(),
 ];
 
 export const sanitize: EditorProps['sanitize'] = (schema) => {
